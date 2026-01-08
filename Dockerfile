@@ -17,6 +17,7 @@ RUN ./gradlew clean bootJar -x test --no-daemon
 
 # 2단계: 실행
 FROM eclipse-temurin:21-jre
+RUN apt-get update && apt-get install -y dnsutils && rm -rf /var/lib/apt/lists/*
 WORKDIR /app
 COPY --from=build /app/build/libs/*.jar app.jar
 
